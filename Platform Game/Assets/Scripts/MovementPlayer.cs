@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class MovementPlayer : MonoBehaviour
 {
@@ -15,7 +18,10 @@ public class MovementPlayer : MonoBehaviour
     private bool grounded;
     private Animator animator;
     private float lastShoot;
-    private int health = 10;
+    private int health = 50;
+    public Slider barraHealth;
+    [SerializeField] ParticleSystem particles;
+
     void Start()
     {
         xInicial = transform.position.x;
@@ -56,6 +62,7 @@ public class MovementPlayer : MonoBehaviour
             Shoot();
             lastShoot = Time.time;
         }
+        barraHealth.value = health;
     }
     private void FixedUpdate()
     {
@@ -65,6 +72,7 @@ public class MovementPlayer : MonoBehaviour
     private void Jump()
     {
         rb.AddForce(Vector2.up * jumpForce);
+        particles.Play();
     }
     
     private void Shoot()
@@ -80,8 +88,14 @@ public class MovementPlayer : MonoBehaviour
 
    public void Hit()
     {
-        //health = health - 1;
-        //if (health == 0) Destroy(gameObject);//
+        health = health - 1;
+        if (health == 0) 
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene("Dead");
+
+        }
+
     }
 
     public void Reset()

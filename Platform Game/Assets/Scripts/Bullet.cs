@@ -31,22 +31,19 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        
+        MovementPlayer player = collision.GetComponent<MovementPlayer>();
+        EnemyController enemy = collision.GetComponent<EnemyController>();
+        if (player != null)
         {
-            GameManager.instance.LoseHearth();
-        }
-        //MovementPlayer player = collision.GetComponent<MovementPlayer>();
-        //EnemyController enemy = collision.GetComponent<EnemyController>();
-       // if (player != null)
-        {
-         //   player.Hit();
+            player.Hit();
         }
 
-        //if (enemy != null)
+        if (enemy != null)
         {
-            //enemy.Hit();
+            enemy.Hit();
         }
-        //DestroyBullet();
+        DestroyBullet();
     }
    
 }

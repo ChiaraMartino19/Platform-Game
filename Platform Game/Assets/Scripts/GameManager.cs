@@ -1,26 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance { get; private set; }
-    private int hearth = 4;
-    public Hud hud;
-    void Start()
+    public int TotalPoints { get { return totalPoints; } }
+    private int totalPoints;
+
+    public void ScorePoints(int pointsToAdds)
     {
-        
+        totalPoints += pointsToAdds;
+
     }
 
 
-    void Update()
+    public void PlayGame()
     {
-        
+        SceneManager.LoadScene("Lobby");
     }
 
-    public void LoseHearth()
+   public void Dead()
     {
-        hearth -= 1;
-        hud.DesactivateHearth(hearth);
+        SceneManager.LoadScene("Dead");
+    }
+
+    public void Game()
+    {
+        SceneManager.LoadScene("Platform");
     }
 }

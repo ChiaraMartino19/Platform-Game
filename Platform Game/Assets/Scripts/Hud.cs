@@ -1,26 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Hud : MonoBehaviour
 {
-    public GameObject[] hearts;
-    void Start()
-    {
-        
-    }
+    public GameManager gameManager;
+    public TextMeshProUGUI points;
 
+    
     void Update()
     {
-        
+        points.text = gameManager.TotalPoints.ToString();
+
     }
-    public void DesactivateHearth(int indice)
-    {
-        hearts[indice].SetActive(false);
-    }
-    public void ActivateHearth(int indice)
-    {
-        hearts[(indice)].SetActive(true);
-    }
-    
 }

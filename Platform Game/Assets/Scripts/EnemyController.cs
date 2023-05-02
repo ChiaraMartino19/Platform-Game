@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public GameObject player;
     private float lastShoot;
-    private int health = 2;
+    private int health = 5;
+    public Slider healthBarra;
    
     
-   private void Update()
+    void Update()
     {
         if(player == null) return;
         Vector3 direction = player.transform.position - transform.position;
@@ -25,7 +27,7 @@ public class EnemyController : MonoBehaviour
             lastShoot = Time.time;
         }
 
-
+        
     }
 
     private void Shoot()
@@ -40,7 +42,8 @@ public class EnemyController : MonoBehaviour
     }
     public void Hit()
     {
-        //health = health - 1;
-        //if (health == 0) Destroy(gameObject);
+        health = health - 1;
+        healthBarra.value = health;
+        if (health == 0) Destroy(gameObject);
     }
 }
